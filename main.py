@@ -5,14 +5,15 @@ import RPi.GPIO as GPIO
 import sys
 
 # Pin Definitions
-output_pin = 17  # BOARD pin 11, BCM pin 17
+output_pin = 10  # BOARD pin 11, BCM pin 17
 
 # Pin Setup:
-GPIO.setmode(GPIO.BCM) # Broadcom pin-numbering scheme
-GPIO.setup(output_pin, GPIO.OUT) # LED pin set as output
+GPIO.setmode(GPIO.BCM)  # Broadcom pin-numbering scheme
+GPIO.setup(output_pin, GPIO.OUT)  # LED pin set as output
 
 # Initial state for LEDs:
 GPIO.output(output_pin, GPIO.HIGH)
+
 
 # Helper functions
 def blink(pin):
@@ -21,9 +22,11 @@ def blink(pin):
     GPIO.output(pin, GPIO.HIGH)
     time.sleep(0.5)
 
+
 def cleanup():
     print("Cleaning up!")
-    GPIO.cleanup() # cleanup all GPIO
+    GPIO.cleanup()  # cleanup all GPIO
+
 
 # Main loop
 if __name__ == '__main__':
@@ -31,7 +34,7 @@ if __name__ == '__main__':
         print("Starting main loop")
         while True:
             blink(output_pin)
-    except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
+    except KeyboardInterrupt:  # If CTRL+C is pressed, exit cleanly:
         cleanup()
     except Exception as e:
         print(e)
