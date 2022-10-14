@@ -1,16 +1,47 @@
-# This is a sample Python script.
+# Raspberry Pi API for a 8x1 LED Matrix
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import time
+import RPi.GPIO as GPIO
+import sys
 
+# Pin Definitions
+output_pin = 17  # BOARD pin 11, BCM pin 17
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Pin Setup:
+GPIO.setmode(GPIO.BCM) # Broadcom pin-numbering scheme
+GPIO.setup(output_pin, GPIO.OUT) # LED pin set as output
 
+# Initial state for LEDs:
+GPIO.output(output_pin, GPIO.HIGH)
 
-# Press the green button in the gutter to run the script.
+# Helper functions
+def blink(pin):
+    GPIO.output(pin, GPIO.LOW)
+    time.sleep(0.5)
+    GPIO.output(pin, GPIO.HIGH)
+    time.sleep(0.5)
+
+def cleanup():
+    print("Cleaning up!")
+    GPIO.cleanup() # cleanup all GPIO
+
+# Main loop
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    try:
+        print("Starting main loop")
+        while True:
+            blink(output_pin)
+    except KeyboardInterrupt: # If CTRL+C is pressed, exit cleanly:
+        cleanup()
+    except Exception as e:
+        print(e)
+        cleanup()
+        sys.exit(1)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# If you are new to Raspberry Pi GPIO, you can find more information here.
+#
+# I have also created a similar tutorial on how to setup a Raspberry Pi GPIO with a 8x8 LED Matrix.
+#
+# Have fun!
+#
+# Related
