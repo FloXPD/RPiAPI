@@ -1,29 +1,36 @@
-#python script to control a 8 pixel led strip raspberry pi with BCM GPIO
+#python script to control a 8 pixel led strip raspberry pi with BCM GPIOzero
 
-# Import modules
-import RPi.GPIO as GPIO
 import time
-import random
+import gpiozero
+from gpiozero import LEDBoard
+from gpiozero.tools import random_values
 
-# Set the GPIO naming convention
-GPIO.setmode(GPIO.BCM)
+#8 pixel led strip
+leds = LEDBoard(23, 24, 25, 8, 7, 1, 12, 16, pwm=True)
 
-# Define GPIO pins
-GPIO.setup(10, GPIO.OUT)
-
-# Define functions
-def red():
-    GPIO.output(18, GPIO.HIGH)
-
-def main():
+try:
     while True:
-        red()
-
-if __name__ == '__main__':
-    main()
-
-# End of script
-
-# Run the script
-# chmod +x main.py
-# ./main.py
+        leds.value = (0, 0, 0, 0, 0, 0, 0, 0)
+        time.sleep(0.1)
+        leds.value = (1, 0, 0, 0, 0, 0, 0, 0)
+        time.sleep(0.1)
+        leds.value = (1, 1, 0, 0, 0, 0, 0, 0)
+        time.sleep(0.1)
+        leds.value = (1, 1, 1, 0, 0, 0, 0, 0)
+        time.sleep(0.1)
+        leds.value = (1, 1, 1, 1, 0, 0, 0, 0)
+        time.sleep(0.1)
+        leds.value = (1, 1, 1, 1, 1, 0, 0, 0)
+        time.sleep(0.1)
+        leds.value = (1, 1, 1, 1, 1, 1, 0, 0)
+        time.sleep(0.1)
+        leds.value = (1, 1, 1, 1, 1, 1, 1, 0)
+        time.sleep(0.1)
+        leds.value = (1, 1, 1, 1, 1, 1, 1, 1)
+        time.sleep(0.1)
+        leds.value = (1, 1, 1, 1, 1, 1, 1, 0)
+        time.sleep(0.1)
+        leds.value = (1, 1, 1, 1, 1, 1, 0, 0)
+        time.sleep(0.1)
+        leds.value = (1, 1, 1, 1, 1, 0, 0, 0)
+        time.sleep(0.1)
