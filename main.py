@@ -34,3 +34,5 @@ try:
         time.sleep(0.1)
         leds.value = (1, 1, 1, 1, 1, 0, 0, 0)
         time.sleep(0.1)
+finally:
+    leds.value = (0, 0, 0, 0, 0, 0, 0, 0)
